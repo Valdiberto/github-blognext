@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: 'Github Blog',
   },
   icons: {
-    icon: '/favicon.png',
+    icon: '/assets/favicon.svg',
   },
 }
 
