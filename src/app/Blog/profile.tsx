@@ -6,10 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 import { ExternalLink } from '../../components/external-link'
 import { ProfileSkeleton } from './profile-skeleton'
 import { GITHUB_USERNAME } from '@/config/github'
+import { api } from '@/services/github'
 
 interface GitHubUser {
   avatar_url: string
@@ -30,9 +30,7 @@ export function Profile() {
     const fetchUserData = async () => {
       try {
         setIsLoading(true)
-        const response = await axios.get<GitHubUser>(
-          `https://api.github.com/users/${GITHUB_USERNAME}`,
-        )
+        const response = await api.get<GitHubUser>(`/users/${GITHUB_USERNAME}`)
         setUserData(response.data)
       } catch (err) {
         console.error('Failed to fetch user data:', err)
@@ -107,7 +105,8 @@ export function Profile() {
               className="h-4.5 w-4.5 text-slate-600"
               icon={faUserGroup}
             />
-            {userData.followers} seguidores
+            {userData.followers}{' '}
+            {userData.followers === 1 ? 'seguidor' : 'seguidores'}
           </li>
         </ul>
       </div>

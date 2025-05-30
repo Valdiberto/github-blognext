@@ -14,6 +14,8 @@ import { PostContent } from './post-content'
 import { GITHUB_REPO, GITHUB_USERNAME } from '@/config/github'
 import { notFound } from 'next/navigation'
 
+export const dynamic = 'force-dynamic'
+
 async function fetchPostDetails(number: string) {
   const response = await api.get(
     `/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/issues/${number}`,
@@ -21,13 +23,20 @@ async function fetchPostDetails(number: string) {
   return response.data
 }
 
-export default async function Post({ params }: { params: { number: string } }) {
-  const postData = await fetchPostDetails(params.number)
+export default async function Post({
+  params,
+}: {
+  params: Promise<{ number: string }>
+}) {
+  const awaitedParams = await params
+
+  const postNumber = awaitedParams.number
+
+  if (!postNumber) notFound()
+
+  const postData = await fetchPostDetails(postNumber)
   const formattedDate = relativeDateFormatter(postData.created_at)
 
-  if (!params?.number) {
-    notFound()
-  }
   return (
     <>
       <div className="rounded-lxl mt-[-88px] flex max-h-42 w-full flex-col bg-slate-900 p-8 shadow-2xl">
@@ -36,6 +45,7 @@ export default async function Post({ params }: { params: { number: string } }) {
             href="/"
             text="Voltar"
             icon={<FontAwesomeIcon icon={faChevronLeft} />}
+            iconPosition="left"
           />
           <ExternalLink
             text="Ver no github"

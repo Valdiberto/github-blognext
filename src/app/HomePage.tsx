@@ -11,7 +11,6 @@ export default function HomePage({ initialPosts }: { initialPosts: IPost[] }) {
   const [posts, setPosts] = useState<IPost[]>(initialPosts)
   const [filteredPosts, setFilteredPosts] = useState<IPost[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const loadPosts = async () => {
@@ -22,7 +21,6 @@ export default function HomePage({ initialPosts }: { initialPosts: IPost[] }) {
         setFilteredPosts(data)
       } catch (error) {
         console.error('Failed to load posts:', error)
-        setError('Failed to load posts. Please try again later.')
       } finally {
         setIsLoading(false)
       }
