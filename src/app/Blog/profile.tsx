@@ -58,7 +58,7 @@ export function Profile() {
   }
 
   return (
-    <div className="rounded-lxl mt-[-88px] flex w-216 gap-8 bg-slate-900 px-10 py-8">
+    <div className="rounded-lxl mt-[-88px] flex gap-4 bg-slate-900 px-5 py-4 lg:w-216 lg:gap-8 lg:px-10 lg:py-8">
       <Image
         className="rounded-lg object-cover"
         src={userData.avatar_url}
@@ -68,7 +68,7 @@ export function Profile() {
         priority
       />
       <div className="flex w-full flex-col">
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-2 flex flex-col items-center justify-between lg:flex-row">
           <h1 className="text-2xl font-bold text-slate-100">
             {userData.name || userData.login}
           </h1>
@@ -82,7 +82,7 @@ export function Profile() {
         <p className="leading-[160%] text-slate-300">
           {userData.bio || 'No bio available'}
         </p>
-        <ul className="mt-auto flex flex-wrap items-center gap-6 text-slate-200">
+        <ul className="mt-auto flex flex-col items-center text-slate-200 lg:flex-row lg:gap-6">
           <li className="flex items-center gap-2">
             <FontAwesomeIcon
               className="h-4.5 w-4.5 text-slate-600"

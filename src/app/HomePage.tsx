@@ -47,7 +47,7 @@ export default function HomePage({ initialPosts }: { initialPosts: IPost[] }) {
     <div className="flex flex-col items-center">
       <Profile />
       <SearchInput onSearch={handleSearch} postsLength={filteredPosts.length} />
-      <div className="grid w-full grid-cols-2 gap-8">
+      <div className="flex w-full flex-col gap-8 lg:grid lg:grid-cols-2">
         {isLoading ? (
           Array.from({ length: 4 }).map((_, index) => (
             <PostCardSkeleton key={index} />

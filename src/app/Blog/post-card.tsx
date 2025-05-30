@@ -11,7 +11,7 @@ export function PostCard({ post }: PostProps) {
   const formattedDate = relativeDateFormatter(post.created_at)
   return (
     <Link
-      className="rounded-lxl h-65 w-full bg-slate-800 p-8"
+      className="rounded-lxl h-65 w-full bg-slate-800 p-6 lg:p-8"
       href={`/post/${post.number}`}
     >
       <div className="mb-5 flex gap-4">

@@ -39,8 +39,8 @@ export default async function Post({
 
   return (
     <>
-      <div className="rounded-lxl mt-[-88px] flex max-h-42 w-full flex-col bg-slate-900 p-8 shadow-2xl">
-        <header className="mb-5 flex w-full items-center justify-between">
+      <div className="rounded-lxl mt-[-88px] flex flex-col bg-slate-900 p-6 shadow-2xl lg:max-h-42 lg:w-full lg:p-8">
+        <header className="mb-5 flex items-center justify-between lg:w-full">
           <ExternalLink
             href="/"
             text="Voltar"
@@ -54,7 +54,7 @@ export default async function Post({
           />
         </header>
         <h1 className="text-2xl font-bold text-slate-100">{postData.title}</h1>
-        <ul className="item-center mt-2 flex gap-6">
+        <ul className="item-center mt-4 flex flex-col gap-2 lg:flex-row lg:gap-6">
           <li className="flex items-center gap-2 text-slate-400">
             <FontAwesomeIcon
               className="h-4.5 w-4.5 text-slate-600"

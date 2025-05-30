@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en" className={`${nunito.variable}`}>
       <body className="antialiased">
         <Header />
-        <div className="font-nunito mx-auto min-h-screen w-216 px-5">
+        <div className="font-nunito mx-auto min-h-screen px-5 lg:w-216">
           <main className="">{children}</main>
         </div>
       </body>
