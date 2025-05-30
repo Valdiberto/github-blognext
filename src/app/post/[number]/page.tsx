@@ -1,0 +1,75 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import {
+  faCalendar,
+  faChevronLeft,
+  faComment,
+} from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
+
+import { ExternalLink } from '@/components/external-link'
+import { api } from '@/services/github'
+import { relativeDateFormatter } from '@/utils/formatter'
+import { PostContent } from './post-content'
+import { GITHUB_REPO, GITHUB_USERNAME } from '@/config/github'
+import { notFound } from 'next/navigation'
+
+async function fetchPostDetails(number: string) {
+  const response = await api.get(
+    `/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/issues/${number}`,
+  )
+  return response.data
+}
+
+export default async function Post({ params }: { params: { number: string } }) {
+  const postData = await fetchPostDetails(params.number)
+  const formattedDate = relativeDateFormatter(postData.created_at)
+
+  if (!params?.number) {
+    notFound()
+  }
+  return (
+    <>
+      <div className="rounded-lxl mt-[-88px] flex max-h-42 w-full flex-col bg-slate-900 p-8 shadow-2xl">
+        <header className="mb-5 flex w-full items-center justify-between">
+          <ExternalLink
+            href="/"
+            text="Voltar"
+            icon={<FontAwesomeIcon icon={faChevronLeft} />}
+          />
+          <ExternalLink
+            text="Ver no github"
+            href={postData.html_url}
+            target="_blank"
+          />
+        </header>
+        <h1 className="text-2xl font-bold text-slate-100">{postData.title}</h1>
+        <ul className="item-center mt-2 flex gap-6">
+          <li className="flex items-center gap-2 text-slate-400">
+            <FontAwesomeIcon
+              className="h-4.5 w-4.5 text-slate-600"
+              icon={faGithub}
+            />
+            {postData.user.login}
+          </li>
+          <li className="flex items-center gap-2 text-slate-400">
+            <FontAwesomeIcon
+              className="h-4.5 w-4.5 text-slate-600"
+              icon={faCalendar}
+            />
+            {formattedDate}
+          </li>
+          <li className="flex items-center gap-2 text-slate-400">
+            <FontAwesomeIcon
+              className="h-4.5 w-4.5 text-slate-600"
+              icon={faComment}
+            />
+            {postData.comments} comentários
+          </li>
+        </ul>
+      </div>
+
+      <PostContent content={postData.body} />
+    </>
+  )
+}

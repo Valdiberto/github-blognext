@@ -1,0 +1,2 @@
+export const GITHUB_USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME!
+export const GITHUB_REPO = process.env.NEXT_PUBLIC_GITHUB_REPONAME!
