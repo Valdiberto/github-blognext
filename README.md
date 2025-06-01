@@ -4,8 +4,7 @@ Um blog técnico moderno, rápido e responsivo, construído com Next.js 14 (App 
 
 ## 🌐 Deploy
 
-Confira a versão em produção:
-[github-blognext.vercel.app](https://github-blognext-myxh.vercel.app/)
+[Confira a versão em produção](https://github-blognext-myxh.vercel.app/)
 
 ## ✨ Funcionalidades
 
